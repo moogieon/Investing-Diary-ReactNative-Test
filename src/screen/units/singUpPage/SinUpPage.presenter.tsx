@@ -1,5 +1,4 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 import {
   Container,
   Head,
@@ -13,10 +12,8 @@ import {
   InvestDate,
   LoginButtonWrapper,
   LoginButton,
-  SignUpWrapper,
-  SignUp,
-} from './SingupPage.styles';
-export default function SingUpPageUI(props) {
+} from './SinUpPage.styles';
+export default function SinUpPageUI(props: any) {
   return (
     <>
       <Container>
@@ -25,7 +22,7 @@ export default function SingUpPageUI(props) {
             <User>{'<'}</User>
           </Button>
           <HeaderBar>
-            <Login>로그인</Login>
+            <Login>회원가입</Login>
           </HeaderBar>
         </Head>
         <Body>
@@ -37,14 +34,13 @@ export default function SingUpPageUI(props) {
               placeholder="비밀번호를 입력해주세요"
               secureTextEntry={true} // 비밀번호 입력
             />
+            <UserInput
+              placeholder="비밀번호를 확인"
+              secureTextEntry={true} // 비밀번호 입력
+            />
             <LoginButtonWrapper>
-              <LoginButton>{'로그인'}</LoginButton>
+              <LoginButton>{'회원가입'}</LoginButton>
             </LoginButtonWrapper>
-            <TouchableOpacity>
-              <SignUpWrapper>
-                <SignUp>{'이메일로 회원가입'}</SignUp>
-              </SignUpWrapper>
-            </TouchableOpacity>
           </InvestList>
         </Body>
       </Container>

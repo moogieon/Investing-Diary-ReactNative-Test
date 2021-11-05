@@ -16,7 +16,7 @@ import {
 } from './MainPage.styles';
 import React from 'react';
 
-export default function MainPageUI(props) {
+export default function MainPageUI(props: any) {
   return (
     <>
       <Container>
@@ -26,7 +26,7 @@ export default function MainPageUI(props) {
             <User>{'창묵'}님</User>
           </HeaderLeft>
           <HeaderBar>
-            <Button>
+            <Button onPress={props.goToSingup}>
               <SingIn>회원가입</SingIn>
             </Button>
             <Button onPress={props.goToLogin}>
@@ -35,7 +35,7 @@ export default function MainPageUI(props) {
           </HeaderBar>
         </Head>
         <Body>
-          <InvestList>
+          <InvestList onPress={props.goToDetail}>
             <InvestDate>
               <InvestText>2021/11/05</InvestText>
             </InvestDate>
@@ -44,7 +44,9 @@ export default function MainPageUI(props) {
             </InvestDetail>
           </InvestList>
         </Body>
-        <WriteBtn></WriteBtn>
+        <WriteBtn onPress={props.goToWrite}>
+          <InvestText>+</InvestText>
+        </WriteBtn>
       </Container>
     </>
   );

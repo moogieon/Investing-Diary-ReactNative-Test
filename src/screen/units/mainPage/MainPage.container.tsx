@@ -9,13 +9,23 @@ export default function MainPage({navigation}: any) {
   const goToSingup = () => {
     navigation.navigate('Singup');
   };
-  // const goToAreaPage = area => () => {
-  //   navigation.navigate('AreaPage', {area: area});
-  // };
+  const goToDetail = () => {
+    navigation.navigate('Detail');
+  };
+  const goToWrite = () => {
+    navigation.navigate('Write');
+  };
 
   // const goToDetailPage = id => () => {
   //   navigation.navigate('BoardDetailPage', {id: id});
   // };
 
-  return <MainPageUI goToLogin={goToLogin} goToSingup={goToSingup} />;
+  return (
+    <MainPageUI
+      goToLogin={goToLogin}
+      goToSingup={goToSingup}
+      goToDetail={goToDetail}
+      goToWrite={goToWrite}
+    />
+  );
 }
