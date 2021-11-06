@@ -13,6 +13,8 @@ import {
   InvestDate,
   InvestDetail,
   InvestText,
+  InvestTilte,
+  InvestContents,
 } from './MainPage.styles';
 import React from 'react';
 
@@ -40,7 +42,8 @@ export default function MainPageUI(props: any) {
               <InvestText>2021/11/05</InvestText>
             </InvestDate>
             <InvestDetail>
-              <InvestText></InvestText>
+              <InvestTilte>제목</InvestTilte>
+              <InvestContents>내용</InvestContents>
             </InvestDetail>
           </InvestList>
         </Body>

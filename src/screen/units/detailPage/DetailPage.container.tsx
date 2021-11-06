@@ -1,8 +1,7 @@
 import React from 'react';
+import {Props} from '../../../../App';
 import DetailPageUI from './DetailPage.presenter';
-type Iprops = {
-  navigation: any;
-};
-export default function DetailPage({navigation}: Iprops) {
+
+export default function DetailPage({navigation}: Props) {
   return <DetailPageUI navigation={navigation} />;
 }

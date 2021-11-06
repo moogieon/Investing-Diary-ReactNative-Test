@@ -1,13 +1,14 @@
 import React from 'react';
+import {Props} from '../../../../App';
 
 import MainPageUI from './MainPage.presenter';
 
-export default function MainPage({navigation}: any) {
+export default function MainPage({navigation}: Props) {
   const goToLogin = () => {
     navigation.navigate('Login');
   };
   const goToSingup = () => {
-    navigation.navigate('Singup');
+    navigation.navigate('Signup');
   };
   const goToDetail = () => {
     navigation.navigate('Detail');

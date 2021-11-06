@@ -5,6 +5,7 @@ export const Container = styled.View`
 `;
 export const Head = styled.View`
   width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -14,7 +15,6 @@ export const Head = styled.View`
 export const HeaderBar = styled.View`
   width: 60%;
   height: 40px;
-
   flex-direction: row;
   justify-content: center;
   align-self: center;
@@ -82,6 +82,7 @@ export const UserInput = styled.TextInput`
   border-bottom-width: 1px;
   font-size: 12px;
 `;
+
 export const ButtonWrapper = styled.View`
   align-items: center;
   justify-content: center;

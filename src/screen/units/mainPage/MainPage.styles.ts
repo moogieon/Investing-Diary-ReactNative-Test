@@ -20,7 +20,7 @@ export const HeaderBar = styled.View`
 
 export const HeaderLeft = styled.View`
   width: 40%;
-  height: 40px;
+  height: 43px;
   justify-content: flex-end;
 `;
 
@@ -64,20 +64,29 @@ export const Body = styled.View`
 export const InvestList = styled.TouchableOpacity`
   border: 1px;
   width: 150px;
-  height: 150px;
+  height: 170px;
+  border-radius: 20px;
 `;
 
 export const InvestDate = styled.View`
   width: 100%;
-  height: 40px;
+  height: 30px;
   align-items: center;
+  justify-content: center;
+  border-bottom-width: 1px;
 `;
 export const InvestDetail = styled.View`
-  border-top-width: 1px;
+  padding-top: 10px;
   width: 100%;
   height: 110px;
-  align-items: center;
+  padding-left: 10px;
 `;
 export const InvestText = styled.Text`
-  font-size: 21px;
+  font-size: 18px;
+`;
+export const InvestTilte = styled.Text`
+  font-size: 14px;
+`;
+export const InvestContents = styled.Text`
+  font-size: 12px;
 `;

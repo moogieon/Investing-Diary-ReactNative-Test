@@ -1,5 +1,9 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {
+  TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from 'react-native';
 import {
   Container,
   Head,
@@ -16,7 +20,19 @@ import {
   SignUpWrapper,
   SignUp,
 } from './LoginPage.styles';
-export default function LoginPageUI(props) {
+
+type IProps = {
+  onChangeEmail: (
+    e: NativeSyntheticEvent<TextInputChangeEventData>,
+  ) => void | undefined;
+  onChangePassword: (
+    e: NativeSyntheticEvent<TextInputChangeEventData>,
+  ) => void | undefined;
+  onClickLogin: () => void;
+  onPressSinUp: () => void;
+  navigation: any;
+};
+export default function LoginPageUI(props: IProps) {
   return (
     <>
       <Container>
@@ -32,15 +48,19 @@ export default function LoginPageUI(props) {
           <InvestList>
             <InvestDate></InvestDate>
 
-            <UserInput placeholder="이메일을 입력해주세요" />
+            <UserInput
+              placeholder="이메일을 입력해주세요"
+              onChange={props.onChangeEmail}
+            />
             <UserInput
               placeholder="비밀번호를 입력해주세요"
               secureTextEntry={true} // 비밀번호 입력
+              onChange={props.onChangePassword}
             />
             <LoginButtonWrapper>
-              <LoginButton>{'로그인'}</LoginButton>
+              <LoginButton onPress={props.onClickLogin}>{'로그인'}</LoginButton>
             </LoginButtonWrapper>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.onPressSinUp}>
               <SignUpWrapper>
                 <SignUp>{'이메일로 회원가입'}</SignUp>
               </SignUpWrapper>

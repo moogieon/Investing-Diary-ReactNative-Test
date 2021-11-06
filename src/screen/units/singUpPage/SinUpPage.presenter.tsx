@@ -29,16 +29,22 @@ export default function SinUpPageUI(props: any) {
           <InvestList>
             <InvestDate></InvestDate>
 
-            <UserInput placeholder="이메일을 입력해주세요" />
+            <UserInput
+              placeholder="이메일을 입력해주세요"
+              onChange={props.onChangeEmail}
+            />
             <UserInput
               placeholder="비밀번호를 입력해주세요"
-              secureTextEntry={true} // 비밀번호 입력
+              secureTextEntry={true}
+              onChange={props.onChangePassword}
+              // 비밀번호 입력
             />
             <UserInput
-              placeholder="비밀번호를 확인"
-              secureTextEntry={true} // 비밀번호 입력
+              placeholder={props.passwrodError}
+              secureTextEntry={true}
+              onChange={props.onChangeConfirmpassword} // 비밀번호 입력
             />
-            <LoginButtonWrapper>
+            <LoginButtonWrapper onPress={props.onClickSingUp}>
               <LoginButton>{'회원가입'}</LoginButton>
             </LoginButtonWrapper>
           </InvestList>

@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {Props} from '../../../../App';
 import WritePageUI from './WritePage.presenter';
-type Iprops = {
-  navigation: any;
-};
-export default function WritePage({navigation}: Iprops) {
-  return <WritePageUI navigation={navigation} />;
+
+export default function WritePage({navigation}: Props) {
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  console.log(date);
+  return (
+    <WritePageUI
+      navigation={navigation}
+      date={date}
+      open={open}
+      setDate={setDate}
+      setOpen={setOpen}
+    />
+  );
 }

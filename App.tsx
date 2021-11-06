@@ -1,14 +1,29 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import React, {useState} from 'react';
 import DetailPage from './src/screen/units/detailPage/DetailPage.container';
 import LoginPage from './src/screen/units/loginPage/LoginPage.container';
 import MainPage from './src/screen/units/mainPage/MainPage.container';
 import SingUpPage from './src/screen/units/singUpPage/SinUpPage.container';
 import WritePage from './src/screen/units/writePage/WritePage.container';
 
-const HomeStack = createNativeStackNavigator();
+export type ParamList = {
+  Main: undefined;
+  Login: undefined;
+  Signup: undefined;
+  Detail: undefined;
+  Write: undefined;
+};
+export type Props = NativeStackScreenProps<ParamList>;
+
+const HomeStack = createNativeStackNavigator<ParamList>();
 const App = () => {
+  const [accessToken, setAccessToken] = useState('');
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+
   return (
     <>
       <NavigationContainer>
@@ -30,10 +45,10 @@ const App = () => {
             }}
           />
           <HomeStack.Screen
-            name="Singup"
+            name="Signup"
             component={SingUpPage}
             options={{
-              title: 'Singup',
+              title: 'Signup',
               headerShown: false,
             }}
           />
