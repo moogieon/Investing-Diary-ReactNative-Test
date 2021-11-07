@@ -1,32 +1,44 @@
 import LoginPageUI from './LoginPage.presenter';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from 'axios';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Alert,
   NativeSyntheticEvent,
   TextInputChangeEventData,
 } from 'react-native';
-import {Props} from '../../../../App';
+import {GlobalContext, Props} from '../../../../App';
+import {CommonActions} from '@react-navigation/routers';
+
 export default function LoginPage({navigation}: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const {setAccessToken, setUser} = useContext(GlobalContext);
   const onClickLogin = async () => {
     try {
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
       const result = await axios.post(
         'https://the-rich-coding-test1.herokuapp.com/users/login/',
+
+        {email: 'qqq@qqq.com', password: '1234'},
         {
-          email,
-          password,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
       );
-      // axios.defaults.headers.common[
-      //   'Authorization'
-      // ] = `Bearer ${result.data.token}`;
-      Alert.alert(result.data.token);
+
+      await AsyncStorage.setItem('accessToken', result.data.token || '');
+      AsyncStorage.setItem(
+        'userInfo',
+        JSON.stringify(result.data.user_id) || '',
+      );
+      navigation.dispatch(CommonActions.navigate('Main'));
+      setAccessToken(result.data.token);
+      Alert.alert('로그인 완료');
     } catch (error: any) {
-      Alert.alert(error.message);
+      console.log(error);
+      Alert.alert(error);
     }
   };
   const onChangePassword = (

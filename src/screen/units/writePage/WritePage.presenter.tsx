@@ -1,6 +1,8 @@
 import React from 'react';
+import {Modal, ScrollView, useWindowDimensions} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {getDate} from '../../commons/libraries/getdate';
+import ModalTester from '../../commons/Modal/Modal';
 
 import {
   Container,
@@ -26,13 +28,21 @@ import {
   InvestText3,
   SubmitText,
   SubmitBtn,
+  AmountBox,
+  Add,
+  Remove,
 } from './WritePage.styles';
 type Iprops = {
   navigation: any;
   setOpen: any;
   setDate: any;
+  setAssetsModal: any;
   open: boolean | undefined;
   date: Date;
+  assets: any;
+  assetsModal: boolean | undefined;
+  onPressAssets: () => void;
+  onPressSubit: () => void;
 };
 export default function WritePageUI(props: Iprops) {
   return (
@@ -41,10 +51,8 @@ export default function WritePageUI(props: Iprops) {
         <Button onPress={() => props.navigation.goBack(null)}>
           <User>{'<'}</User>
         </Button>
-
         <Login>투자일지 작성</Login>
-
-        <SubmitBtn>
+        <SubmitBtn onPress={props.onPressSubit}>
           <SubmitText>저장</SubmitText>
         </SubmitBtn>
       </Head>
@@ -69,23 +77,53 @@ export default function WritePageUI(props: Iprops) {
               }}></DatePicker>
 
             <BodyWraaper>
-              <InvestTitle placeholder={'제목을 입력하세요'}></InvestTitle>
+              <InvestTitle
+                onChangeText={props.onChangeTitle}
+                placeholder={'제목을 입력하세요'}></InvestTitle>
               <WriteBox>
                 <InvestContents
+                  onChangeText={props.onChangeContent}
                   placeholder={'내용을 입력하세요'}></InvestContents>
               </WriteBox>
+              {/* 투자항목 추가 */}
               <InvestText>투자하기</InvestText>
               <Invests>
-                <InvestAdd>
-                  <InvestText>+</InvestText>
-                </InvestAdd>
-                <InvestDetail>
-                  <InvestText1>Apple</InvestText1>
-                  <InvestText0>수량:</InvestText0>
-                  <InvestText2>10</InvestText2>
-                  <InvestText0>가격:</InvestText0>
-                  <InvestText3>110$</InvestText3>
-                </InvestDetail>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  <InvestAdd
+                    // onPress={props.onPressAssets}
+                    onPress={() => props.setAssetsModal(true)}>
+                    <InvestText>+</InvestText>
+                  </InvestAdd>
+                  <Modal
+                    visible={props.assetsModal}
+                    animationType="slide"
+                    transparent={true}>
+                    <ModalTester
+                      subitAssets={props.subitAssets}
+                      setAssetsModal={props.setAssetsModal}
+                      setAssets={props.setAssets}
+                      assets={props.assets}></ModalTester>
+                  </Modal>
+
+                  {props.list?.map((data: any) => (
+                    <InvestDetail key={data.id}>
+                      <InvestText1>{data?.name}</InvestText1>
+                      <InvestText0>수량:</InvestText0>
+                      <AmountBox>
+                        <SubmitBtn>
+                          <Remove>◀︎</Remove>
+                        </SubmitBtn>
+                        <InvestText3>{data.length}</InvestText3>
+                        <SubmitBtn>
+                          <Add>▶︎</Add>
+                        </SubmitBtn>
+                      </AmountBox>
+                      <InvestText2>{data?.amount}</InvestText2>
+                      <InvestText0></InvestText0>
+                      <InvestText3>${data?.price}</InvestText3>
+                    </InvestDetail>
+                  ))}
+                </ScrollView>
               </Invests>
             </BodyWraaper>
           </InvestList>

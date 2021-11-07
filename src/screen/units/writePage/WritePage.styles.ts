@@ -44,7 +44,7 @@ export const Body = styled.View`
   background-color: mintcream;
   width: 100%;
   height: 100%;
-  /* padding: 20px; */
+
   align-items: center;
   justify-content: space-between;
 `;
@@ -95,16 +95,16 @@ export const WriteBox = styled.View`
 `;
 export const InvestDetail = styled.View`
   border: 1px;
-  width: 30%;
-  height: 100%;
+  width: 100px;
+  height: 160px;
   padding: 10px;
   border-radius: 30px;
   margin-right: 10px;
 `;
 export const InvestAdd = styled.TouchableOpacity`
   border: 1px;
-  width: 30%;
-  height: 100%;
+  width: 100px;
+  height: 160px;
   padding: 10px;
   border-radius: 30px;
   margin-right: 10px;
@@ -113,13 +113,15 @@ export const InvestAdd = styled.TouchableOpacity`
 `;
 export const Invests = styled.View`
   margin-top: 10px;
-  border: 1px;
   width: 100%;
   height: 160px;
-  padding: 10px;
+`;
+export const AmountBox = styled.View`
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 100%;
+  height: 20px;
 `;
 export const InvestText = styled.Text`
   font-size: 16px;
@@ -141,5 +143,13 @@ export const InvestText3 = styled.Text`
 export const InvestText0 = styled.Text`
   font-size: 12px;
   color: #bdbdbd;
+`;
+export const Add = styled.Text`
+  font-size: 18px;
+  color: blue;
+`;
+export const Remove = styled.Text`
+  font-size: 18px;
+  color: red;
 `;
 export const SubmitBtn = styled.TouchableOpacity``;
