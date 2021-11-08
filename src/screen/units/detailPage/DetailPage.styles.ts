@@ -8,20 +8,13 @@ export const Head = styled.View`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
   background-color: black;
 `;
-export const HeaderBar = styled.View`
-  width: 60%;
-  height: 40px;
-  flex-direction: row;
-  justify-content: center;
-  align-self: center;
-`;
 
 export const Button = styled.TouchableOpacity`
-  width: 20%;
   align-self: center;
 `;
 
@@ -33,7 +26,6 @@ export const User = styled.Text`
 export const Login = styled.Text`
   font-size: 20px;
   color: white;
-  line-height: 45px;
 `;
 
 export const WriteBtn = styled.TouchableOpacity`
@@ -90,20 +82,22 @@ export const InvestDetail = styled.View`
   margin-right: 10px;
 `;
 export const InvestsContents = styled.View`
-  border: 1px;
   width: 100%;
   height: 38%;
   /* padding-left: 10px; */
 `;
 export const Invests = styled.View`
-  border: 1px;
   width: 100%;
   height: 160px;
 
   justify-content: space-between;
 `;
-export const InvestText = styled.Text`
+export const InvestTextTitle = styled.Text`
   font-size: 21px;
+  font-weight: bold;
+`;
+export const InvestText = styled.Text`
+  font-size: 17px;
 `;
 export const InvestText1 = styled.Text`
   font-size: 15px;
@@ -117,4 +111,9 @@ export const InvestText3 = styled.Text`
 export const InvestText0 = styled.Text`
   font-size: 12px;
   color: #bdbdbd;
+`;
+export const SubmitBtn = styled.TouchableOpacity``;
+export const SubmitText = styled.Text`
+  font-size: 15px;
+  color: white;
 `;

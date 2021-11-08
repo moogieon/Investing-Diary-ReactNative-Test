@@ -140,6 +140,7 @@ export const InvestText2 = styled.Text`
 export const InvestText3 = styled.Text`
   font-size: 15px;
 `;
+
 export const InvestText0 = styled.Text`
   font-size: 12px;
   color: #bdbdbd;

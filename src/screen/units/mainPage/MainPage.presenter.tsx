@@ -18,7 +18,8 @@ import {
 } from './MainPage.styles';
 import React, {useContext} from 'react';
 import {GlobalContext} from '../../../../App';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
+import {getDate} from '../../commons/libraries/getdate';
 
 export default function MainPageUI(props: any) {
   const {accessToken, user} = useContext(GlobalContext);
@@ -65,15 +66,19 @@ export default function MainPageUI(props: any) {
         {accessToken && (
           <>
             <Body>
-              <InvestList onPress={props.goToDetail}>
-                <InvestDate>
-                  <InvestText>2021/11/05</InvestText>
-                </InvestDate>
-                <InvestDetail>
-                  <InvestTilte>제목</InvestTilte>
-                  <InvestContents>내용</InvestContents>
-                </InvestDetail>
-              </InvestList>
+              <ScrollView horizontal>
+                {props.list?.map(data => (
+                  <InvestList onPress={props.goToDetail(data)} key={data.id}>
+                    <InvestDate>
+                      <InvestText>{getDate(data.date)}</InvestText>
+                    </InvestDate>
+                    <InvestDetail>
+                      <InvestTilte>{data.title}</InvestTilte>
+                      <InvestContents>{data.contents}</InvestContents>
+                    </InvestDetail>
+                  </InvestList>
+                ))}
+              </ScrollView>
             </Body>
             <WriteBtn onPress={props.goToWrite}>
               <InvestText>+</InvestText>

@@ -17,7 +17,6 @@ import SingUpPage from './src/screen/units/singUpPage/SinUpPage.container';
 import WritePage from './src/screen/units/writePage/WritePage.container';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
 
 export type ParamList = {
   Main: undefined;
@@ -32,6 +31,8 @@ interface IContext {
   setAccessToken?: Dispatch<SetStateAction<undefined>>;
   setUser?: Dispatch<SetStateAction<undefined>>;
   user?: number;
+  assetsCount?: any;
+  setAssetsCount?: React.Dispatch<any>;
 }
 
 export const GlobalContext = createContext<IContext>({});
@@ -49,6 +50,7 @@ const App = () => {
   }, []);
 
   const [accessToken, setAccessToken] = useState();
+
   const [user, setUser] = useState();
 
   const value = {

@@ -99,10 +99,9 @@ export default function WritePageUI(props: Iprops) {
                     animationType="slide"
                     transparent={true}>
                     <ModalTester
+                      onPressSubit={props.onPressSubit}
                       subitAssets={props.subitAssets}
-                      setAssetsModal={props.setAssetsModal}
-                      setAssets={props.setAssets}
-                      assets={props.assets}></ModalTester>
+                      setAssetsModal={props.setAssetsModal}></ModalTester>
                   </Modal>
 
                   {props.list?.map((data: any) => (
@@ -110,11 +109,12 @@ export default function WritePageUI(props: Iprops) {
                       <InvestText1>{data?.name}</InvestText1>
                       <InvestText0>수량:</InvestText0>
                       <AmountBox>
-                        <SubmitBtn>
+                        <SubmitBtn
+                          onPress={props.onClickPlus(data.id, 'minus')}>
                           <Remove>◀︎</Remove>
                         </SubmitBtn>
-                        <InvestText3>{data.length}</InvestText3>
-                        <SubmitBtn>
+                        <InvestText3>{props.count}</InvestText3>
+                        <SubmitBtn onPress={props.onClickPlus('plus')}>
                           <Add>▶︎</Add>
                         </SubmitBtn>
                       </AmountBox>

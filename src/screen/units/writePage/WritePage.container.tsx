@@ -13,10 +13,10 @@ export default function WritePage({navigation}: Props) {
   const [date, setDate] = useState(new Date());
   const [diaries, setDiaries] = useState(INPUT_CONTENTS);
   const [open, setOpen] = useState(false);
-  const [assets, setAssets] = useState([]);
   const [list, setList] = useState([]);
   const [assetsModal, setAssetsModal] = useState(false);
-  console.log(assets);
+  const [count, setCount] = useState([0, 0, 0]);
+  const URL = 'https://the-rich-coding-test1.herokuapp.com/diary_assets';
   const onPressSubit = async () => {
     try {
       const res = await axios.post(
@@ -28,11 +28,19 @@ export default function WritePage({navigation}: Props) {
         },
         {headers: {Authorization: `Bearer ${accessToken}`}},
       );
+      const result = await axios.post(
+        'https://the-rich-coding-test1.herokuapp.com/diary_assets',
+        {
+          diary_id: res.data.id,
+          asset_id: list[0].id,
+          amount: count,
+          buy_price: 110,
+        },
 
-      console.log(assets);
-      Alert.alert('등록완료', res.data.url);
-      console.log('등록완료', res.data.url);
-      navigation.navigate('Main');
+        {headers: {Authorization: `Bearer ${accessToken}`}},
+      );
+      // navigation.navigate('Main');
+      console.log(result.data);
     } catch (error) {
       Alert.alert(error);
     }
@@ -46,26 +54,23 @@ export default function WritePage({navigation}: Props) {
 
   const subitAssets = invest => () => {
     let isExists = false;
+    const temp = [];
     list.forEach(data => {
       if (data.id === invest.id) isExists = true;
     });
     if (isExists) return alert('!! 이미 담았습니다 !!.');
-    else {
-      setList(prevList => {
-        return [invest, ...prevList];
-      });
-    }
-
-    console.log(list);
-    console.log(
-      '??',
-      list.map((data: any) => data.name),
-    );
+    if (temp.push(invest)) setList(temp);
+    console.log('@@@', list);
 
     setAssetsModal(false);
   };
-  console.log('list', list);
-  const onClick = () => {};
+
+  const onClickPlus = type => () => {
+    if (type === 'plus') setCount(prev => prev + 1);
+    else if (type === 'minus') setCount(prev => prev - 1);
+    // console.log('ss', type);
+  };
+
   return (
     <WritePageUI
       navigation={navigation}
@@ -73,8 +78,6 @@ export default function WritePage({navigation}: Props) {
       open={open}
       setDate={setDate}
       setOpen={setOpen}
-      assets={assets}
-      setAssets={setAssets}
       list={list}
       assetsModal={assetsModal}
       subitAssets={subitAssets}
@@ -82,6 +85,8 @@ export default function WritePage({navigation}: Props) {
       onPressSubit={onPressSubit}
       onChangeContent={onChangeContent}
       onChangeTitle={onChangeTitle}
+      onClickPlus={onClickPlus}
+      count={count}
     />
   );
 }

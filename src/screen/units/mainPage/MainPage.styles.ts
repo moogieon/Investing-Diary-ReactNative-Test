@@ -56,16 +56,17 @@ export const WriteBtn = styled.TouchableOpacity`
 
 // ------------
 export const Body = styled.View`
-  background-color: mintcream;
   width: 100%;
   height: 100%;
   padding: 20px;
+  flex-direction: row;
 `;
 export const InvestList = styled.TouchableOpacity`
   border: 1px;
   width: 150px;
   height: 170px;
   border-radius: 20px;
+  margin-right: 10px;
 `;
 
 export const InvestDate = styled.View`
@@ -86,6 +87,7 @@ export const InvestText = styled.Text`
 `;
 export const InvestTilte = styled.Text`
   font-size: 14px;
+  font-weight: bold;
 `;
 export const InvestContents = styled.Text`
   font-size: 12px;

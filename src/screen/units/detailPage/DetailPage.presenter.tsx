@@ -1,4 +1,5 @@
 import React from 'react';
+import {getDate} from '../../commons/libraries/getdate';
 
 import {
   Container,
@@ -7,7 +8,6 @@ import {
   Button,
   Login,
   Body,
-  HeaderBar,
   InvestList,
   InvestDate,
   BodyWraaper,
@@ -15,11 +15,14 @@ import {
   InvestsContents,
   InvestDetail,
   InvestText,
+  InvestTextTitle,
   Invests,
   InvestText0,
   InvestText1,
   InvestText2,
   InvestText3,
+  SubmitText,
+  SubmitBtn,
 } from './DetailPage.styles';
 type Iprops = {
   navigation: any;
@@ -32,23 +35,26 @@ export default function DetailPageUI(props: Iprops) {
           <Button onPress={() => props.navigation.goBack(null)}>
             <User>{'<'}</User>
           </Button>
-          <HeaderBar>
-            <Login>내 투자일지</Login>
-          </HeaderBar>
+          <Login>내 투자일지</Login>
+          <SubmitBtn onPress={props.onPressDelete(props.itemDetail.url)}>
+            <SubmitText>삭제</SubmitText>
+          </SubmitBtn>
         </Head>
         <Body>
           <InvestList>
             <InvestDate>
-              <InvestText>2021/11/05</InvestText>
+              <InvestTextTitle>
+                {getDate(props.itemDetail.date)}
+              </InvestTextTitle>
             </InvestDate>
             <BodyWraaper>
               <InvestTitle>
-                <InvestText>제목</InvestText>
+                <InvestTextTitle>{props.itemDetail.title}</InvestTextTitle>
               </InvestTitle>
               <InvestsContents>
-                <InvestText>s</InvestText>
+                <InvestText>{props.itemDetail.contents}</InvestText>
               </InvestsContents>
-              <InvestText>투자한 종목들</InvestText>
+              <InvestTextTitle>투자한 종목들</InvestTextTitle>
               <Invests>
                 <InvestDetail>
                   <InvestText1>Apple</InvestText1>
