@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, ScrollView, useWindowDimensions} from 'react-native';
+import {Modal, ScrollView} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {getDate} from '../../commons/libraries/getdate';
 import ModalTester from '../../commons/Modal/Modal';
@@ -24,13 +24,10 @@ import {
   InvestDetail,
   InvestText0,
   InvestText1,
-  InvestText2,
   InvestText3,
   SubmitText,
   SubmitBtn,
   AmountBox,
-  Add,
-  Remove,
 } from './WritePage.styles';
 type Iprops = {
   navigation: any;
@@ -104,23 +101,15 @@ export default function WritePageUI(props: Iprops) {
                       setAssetsModal={props.setAssetsModal}></ModalTester>
                   </Modal>
 
-                  {props.list?.map((data: any) => (
+                  {props.assets.map((data: any) => (
                     <InvestDetail key={data.id}>
                       <InvestText1>{data?.name}</InvestText1>
                       <InvestText0>수량:</InvestText0>
                       <AmountBox>
-                        <SubmitBtn
-                          onPress={props.onClickPlus(data.id, 'minus')}>
-                          <Remove>◀︎</Remove>
-                        </SubmitBtn>
-                        <InvestText3>{props.count}</InvestText3>
-                        <SubmitBtn onPress={props.onClickPlus('plus')}>
-                          <Add>▶︎</Add>
-                        </SubmitBtn>
+                        <InvestText3>{data.amount}</InvestText3>
                       </AmountBox>
-                      <InvestText2>{data?.amount}</InvestText2>
-                      <InvestText0></InvestText0>
-                      <InvestText3>${data?.price}</InvestText3>
+                      <InvestText0>가격</InvestText0>
+                      <InvestText3>${data.buy_price}</InvestText3>
                     </InvestDetail>
                   ))}
                 </ScrollView>

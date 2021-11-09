@@ -18,9 +18,9 @@ export default function LoginPage({navigation}: Props) {
     try {
       axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
       const result = await axios.post(
-        'https://the-rich-coding-test1.herokuapp.com/users/login/',
+        'https://the-rich-coding-test1.herokuapp.com/users/login',
 
-        {email: 'qqq@qqq.com', password: '1234'},
+        {email, password},
         {
           headers: {
             'Content-Type': 'application/json',

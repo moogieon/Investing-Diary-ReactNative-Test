@@ -1,30 +1,47 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 function ModalTester(props: any) {
   const [list, setList] = useState([] as any);
+  const [count, setCount] = useState({amount: '', buy_price: ''});
+  const [datas, setDatas] = useState([] as any);
 
   useEffect(() => {
     const getData = async () => {
       const resultList = await axios.get(
         'https://the-rich-coding-test1.herokuapp.com/assets.json',
       );
-      setList(resultList.data);
+      setDatas(resultList.data);
     };
-    console.log(list);
+
+    const answer = {};
+    datas.forEach(data => {
+      answer[data.ticker] = {
+        id: data.id,
+        name: data.name,
+        amount: count.amount,
+        buy_price: count.buy_price,
+      };
+    });
+
+    setList(answer);
     getData();
-  }, []);
-  const onChangeName = text => {
-    props.setAssets({...props.assets, name: text});
-  };
+    console.log('오?', datas);
+  }, [datas]);
+
   const onChangeAmount = text => {
-    props.setAssets({...props.assets, amount: text});
+    setCount({...count, amount: text});
   };
   const onChangePrice = text => {
-    props.setAssets({...props.assets, price: text});
+    setCount({...count, buy_price: text});
   };
-  console.log('오?', props.assets);
 
   return (
     <View
@@ -34,11 +51,6 @@ function ModalTester(props: any) {
         alignItems: 'center',
         backgroundColor: '#000000ae',
       }}>
-      <TouchableOpacity
-        onPress={() => props.setAssetsModal(false)}
-        style={{position: 'absolute', left: 370, top: 100}}>
-        <Text style={{fontSize: 60}}>x</Text>
-      </TouchableOpacity>
       <View
         style={{
           borderRadius: 10,
@@ -49,6 +61,12 @@ function ModalTester(props: any) {
           alignItems: 'center',
           paddingTop: 32,
         }}>
+        <TouchableOpacity
+          onPress={() => props.setAssetsModal(false)}
+          style={{position: 'absolute', right: 10, bottom: 320}}>
+          <Text style={{fontSize: 20}}>❌</Text>
+        </TouchableOpacity>
+        <Text style={{fontSize: 14}}>목록 보기</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -58,16 +76,26 @@ function ModalTester(props: any) {
             borderBottomWidth: 1,
             paddingLeft: 30,
           }}>
-          <Text style={{width: '37%', fontWeight: 'bold', color: 'darkgrey'}}>
+          <Text style={{width: '30%', fontWeight: 'bold', color: 'darkgrey'}}>
             종목
           </Text>
-          <Text style={{width: '37%', fontWeight: 'bold', color: 'darkgrey'}}>
+          <Text style={{width: 30, fontWeight: 'bold', color: 'darkgrey'}}>
+            수량
+          </Text>
+          <Text
+            style={{
+              width: '28%',
+              fontWeight: 'bold',
+              color: 'darkgrey',
+              marginLeft: 30,
+            }}>
             가격
           </Text>
           <Text>선택</Text>
         </View>
         <ScrollView>
-          {list.map(data => (
+          {/* {datas.map(data => ( */}
+          {Object.values(list).map(data => (
             <View
               key={data.id}
               style={{
@@ -78,12 +106,29 @@ function ModalTester(props: any) {
                 alignItems: 'center',
                 paddingLeft: 30,
               }}>
-              <Text style={{width: '37%', fontWeight: 'bold'}}>
+              <Text style={{width: '30%', fontWeight: 'bold'}}>
                 {data.name}
               </Text>
-              <Text style={{width: '30%'}}>${data.price}</Text>
-              <TouchableOpacity onPress={props.onPressSubit(data)}>
-                <Text style={{color: '#ba8108ac'}}>추가하기</Text>
+              <TextInput
+                onChangeText={onChangeAmount}
+                style={{
+                  borderBottomWidth: 1,
+                  width: 30,
+                  height: 40,
+                  textAlign: 'center',
+                }}></TextInput>
+              <TextInput
+                onChangeText={onChangePrice}
+                style={{
+                  borderBottomWidth: 1,
+                  textAlign: 'center',
+                  width: 50,
+                  height: 40,
+                  marginLeft: 30,
+                  marginRight: 25,
+                }}></TextInput>
+              <TouchableOpacity onPress={props.subitAssets(data)}>
+                <Text style={{color: '#ba8108ac'}}>추가</Text>
               </TouchableOpacity>
             </View>
           ))}

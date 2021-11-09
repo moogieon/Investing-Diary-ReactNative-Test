@@ -47,6 +47,7 @@ export const Body = styled.View`
   padding: 10px;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 `;
 export const InvestList = styled.View`
   width: 100%;
@@ -75,11 +76,13 @@ export const InvestTitle = styled.View`
 `;
 export const InvestDetail = styled.View`
   border: 1px;
-  width: 30%;
+  width: 120px;
   height: 100%;
   padding: 10px;
   border-radius: 30px;
   margin-right: 10px;
+  background-color: #fff;
+  elevation: 4;
 `;
 export const InvestsContents = styled.View`
   width: 100%;
@@ -88,7 +91,7 @@ export const InvestsContents = styled.View`
 `;
 export const Invests = styled.View`
   width: 100%;
-  height: 160px;
+  height: 170px;
 
   justify-content: space-between;
 `;
@@ -116,4 +119,9 @@ export const SubmitBtn = styled.TouchableOpacity``;
 export const SubmitText = styled.Text`
   font-size: 15px;
   color: white;
+`;
+export const InvestDelete = styled.Text`
+  margin-left: 65px;
+  font-size: 14px;
+  color: red;
 `;

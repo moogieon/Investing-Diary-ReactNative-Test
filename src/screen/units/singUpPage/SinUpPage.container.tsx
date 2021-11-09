@@ -21,7 +21,7 @@ export default function SinUpPage({navigation}: Props) {
 
     if (confirmpassword !== password) return;
     try {
-      await axios.post('https://the-rich-coding-test1.herokuapp.com/users/', {
+      await axios.post('https://the-rich-coding-test1.herokuapp.com/users', {
         email,
         password,
       });

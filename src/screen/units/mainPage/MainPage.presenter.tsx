@@ -18,7 +18,7 @@ import {
 } from './MainPage.styles';
 import React, {useContext} from 'react';
 import {GlobalContext} from '../../../../App';
-import {ScrollView, Text, View} from 'react-native';
+import {FlatList, ScrollView, Text, View} from 'react-native';
 import {getDate} from '../../commons/libraries/getdate';
 
 export default function MainPageUI(props: any) {
@@ -66,19 +66,25 @@ export default function MainPageUI(props: any) {
         {accessToken && (
           <>
             <Body>
-              <ScrollView horizontal>
-                {props.list?.map(data => (
-                  <InvestList onPress={props.goToDetail(data)} key={data.id}>
-                    <InvestDate>
-                      <InvestText>{getDate(data.date)}</InvestText>
-                    </InvestDate>
-                    <InvestDetail>
-                      <InvestTilte>{data.title}</InvestTilte>
-                      <InvestContents>{data.contents}</InvestContents>
-                    </InvestDetail>
-                  </InvestList>
-                ))}
-              </ScrollView>
+              <InvestText>내 투자일지</InvestText>
+
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <FlatList
+                  data={props.list}
+                  numColumns={2}
+                  renderItem={({item}) => (
+                    <InvestList onPress={props.goToDetail(item)} key={item.id}>
+                      <InvestDate>
+                        <InvestText> {getDate(item.date)}</InvestText>
+                      </InvestDate>
+                      <InvestDetail>
+                        <InvestTilte>{item.title}</InvestTilte>
+                        <InvestContents>{item.contents}</InvestContents>
+                      </InvestDetail>
+                    </InvestList>
+                  )}
+                />
+              </View>
             </Body>
             <WriteBtn onPress={props.goToWrite}>
               <InvestText>+</InvestText>

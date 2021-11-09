@@ -59,14 +59,17 @@ export const Body = styled.View`
   width: 100%;
   height: 100%;
   padding: 20px;
-  flex-direction: row;
+  flex-direction: column;
 `;
 export const InvestList = styled.TouchableOpacity`
   border: 1px;
-  width: 150px;
+  width: 180px;
   height: 170px;
   border-radius: 20px;
   margin-right: 10px;
+  margin-top: 10px;
+  elevation: 2;
+  background-color: #fff;
 `;
 
 export const InvestDate = styled.View`
@@ -74,7 +77,7 @@ export const InvestDate = styled.View`
   height: 30px;
   align-items: center;
   justify-content: center;
-  border-bottom-width: 1px;
+  /* border-bottom-width: 1px; */
 `;
 export const InvestDetail = styled.View`
   padding-top: 10px;
@@ -84,6 +87,7 @@ export const InvestDetail = styled.View`
 `;
 export const InvestText = styled.Text`
   font-size: 18px;
+  font-weight: bold;
 `;
 export const InvestTilte = styled.Text`
   font-size: 14px;

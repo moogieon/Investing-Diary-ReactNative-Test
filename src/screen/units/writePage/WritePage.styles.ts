@@ -134,9 +134,7 @@ export const SubmitText = styled.Text`
 export const InvestText1 = styled.Text`
   font-size: 15px;
 `;
-export const InvestText2 = styled.Text`
-  font-size: 15px;
-`;
+
 export const InvestText3 = styled.Text`
   font-size: 15px;
 `;
@@ -144,13 +142,5 @@ export const InvestText3 = styled.Text`
 export const InvestText0 = styled.Text`
   font-size: 12px;
   color: #bdbdbd;
-`;
-export const Add = styled.Text`
-  font-size: 18px;
-  color: blue;
-`;
-export const Remove = styled.Text`
-  font-size: 18px;
-  color: red;
 `;
 export const SubmitBtn = styled.TouchableOpacity``;

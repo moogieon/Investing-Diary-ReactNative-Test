@@ -17,6 +17,7 @@ import SingUpPage from './src/screen/units/singUpPage/SinUpPage.container';
 import WritePage from './src/screen/units/writePage/WritePage.container';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 export type ParamList = {
   Main: undefined;
@@ -37,12 +38,17 @@ interface IContext {
 
 export const GlobalContext = createContext<IContext>({});
 const HomeStack = createNativeStackNavigator<ParamList>();
+
 const App = () => {
   useEffect(() => {
     async function bbb() {
       const aaa = await AsyncStorage.getItem('accessToken');
       const ccc = await AsyncStorage.getItem('userInfo');
+      const resultList = await axios.get(
+        'https://the-rich-coding-test1.herokuapp.com/assets.json',
+      );
       setAccessToken(aaa);
+      setAssets(resultList.data);
       setUser(ccc);
     }
 
@@ -51,6 +57,7 @@ const App = () => {
 
   const [accessToken, setAccessToken] = useState();
 
+  const [assets, setAssets] = useState([]);
   const [user, setUser] = useState();
 
   const value = {
@@ -58,6 +65,8 @@ const App = () => {
     setAccessToken: setAccessToken,
     user: user,
     setUser: setUser,
+    setAssets: setAssets,
+    assets: assets,
   };
   console.log('Token', accessToken);
   return (

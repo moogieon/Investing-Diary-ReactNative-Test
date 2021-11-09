@@ -8,17 +8,18 @@ const INPUT_CONTENTS = {
   title: '',
   contents: '',
 };
+
 export default function WritePage({navigation}: Props) {
   const {accessToken} = useContext(GlobalContext);
   const [date, setDate] = useState(new Date());
   const [diaries, setDiaries] = useState(INPUT_CONTENTS);
+  const [assets, setAssets] = useState([]);
   const [open, setOpen] = useState(false);
-  const [list, setList] = useState([]);
   const [assetsModal, setAssetsModal] = useState(false);
-  const [count, setCount] = useState([0, 0, 0]);
-  const URL = 'https://the-rich-coding-test1.herokuapp.com/diary_assets';
+
   const onPressSubit = async () => {
     try {
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
       const res = await axios.post(
         'https://the-rich-coding-test1.herokuapp.com/diaries',
         {
@@ -26,25 +27,41 @@ export default function WritePage({navigation}: Props) {
           contents: diaries.contents,
           date,
         },
-        {headers: {Authorization: `Bearer ${accessToken}`}},
-      );
-      const result = await axios.post(
-        'https://the-rich-coding-test1.herokuapp.com/diary_assets',
         {
-          diary_id: res.data.id,
-          asset_id: list[0].id,
-          amount: count,
-          buy_price: 110,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-
-        {headers: {Authorization: `Bearer ${accessToken}`}},
       );
-      // navigation.navigate('Main');
-      console.log(result.data);
+      const diary_id = res.data.id;
+      let url = 'https://the-rich-coding-test1.herokuapp.com/diary_assets';
+
+      const result = await Promise.all(
+        assets.map(bbb => {
+          return axios.post(
+            url,
+            {
+              diary_id,
+              asset_id: bbb.id,
+              amount: bbb.amount,
+              buy_price: bbb.buy_price,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            },
+          );
+        }),
+      );
+
+      navigation.navigate('Main');
+      console.log('parmas', result);
     } catch (error) {
-      Alert.alert(error);
+      Alert.alert(error.message);
     }
   };
+
   const onChangeContent = text => {
     setDiaries({...diaries, contents: text});
   };
@@ -54,22 +71,16 @@ export default function WritePage({navigation}: Props) {
 
   const subitAssets = invest => () => {
     let isExists = false;
-    const temp = [];
-    list.forEach(data => {
-      if (data.id === invest.id) isExists = true;
+    assets.forEach(data => {
+      if (data.name === invest.name) isExists = true;
     });
     if (isExists) return alert('!! 이미 담았습니다 !!.');
-    if (temp.push(invest)) setList(temp);
-    console.log('@@@', list);
-
+    setAssets(list => {
+      return [...list, invest];
+    });
     setAssetsModal(false);
   };
-
-  const onClickPlus = type => () => {
-    if (type === 'plus') setCount(prev => prev + 1);
-    else if (type === 'minus') setCount(prev => prev - 1);
-    // console.log('ss', type);
-  };
+  console.log('이거다', assets);
 
   return (
     <WritePageUI
@@ -78,15 +89,14 @@ export default function WritePage({navigation}: Props) {
       open={open}
       setDate={setDate}
       setOpen={setOpen}
-      list={list}
       assetsModal={assetsModal}
       subitAssets={subitAssets}
       setAssetsModal={setAssetsModal}
       onPressSubit={onPressSubit}
       onChangeContent={onChangeContent}
       onChangeTitle={onChangeTitle}
-      onClickPlus={onClickPlus}
-      count={count}
+      setAssets={setAssets}
+      assets={assets}
     />
   );
 }
