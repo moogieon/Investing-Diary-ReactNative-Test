@@ -82,6 +82,7 @@ or enter ` npx react-native run-android`
 #### 3-1. 투자일지 작성 - 투자하기
 
 (저장 버튼을 누르면 투자 일지가 먼저 서버로 전송되고 반환된 id값을 곧 바로 투자 할목들을 promise all을 이용해서 동시에 순차적으로 서버에 post를 한다.)
+
 ![투자하기](https://user-images.githubusercontent.com/86825253/141154040-98f78eb6-445e-4798-bdf2-50990a743caa.gif)
 ![종목 리스트](https://user-images.githubusercontent.com/86825253/141153933-3daf442e-44bc-409d-ab28-a749af6834e0.gif)
 
