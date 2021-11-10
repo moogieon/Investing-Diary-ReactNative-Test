@@ -7,7 +7,7 @@ import DetailPageUI from './DetailPage.presenter';
 export default function DetailPage({navigation, route}: Props) {
   const [itemDetail, setItemDetail] = useState([] as any);
   const [assetList, setAssetList] = useState([]);
-  const {accessToken, assets} = useContext(GlobalContext);
+  const {accessToken, assets, setReFetch} = useContext(GlobalContext);
   useEffect(() => {
     const getData = async () => {
       const resultList = await axios.get(route.params.id, {
@@ -33,6 +33,7 @@ export default function DetailPage({navigation, route}: Props) {
       });
       Alert.alert('삭제완료');
       navigation.navigate('Main');
+      setReFetch('delete');
     } catch (error) {
       Alert.alert(error);
     }
@@ -46,10 +47,8 @@ export default function DetailPage({navigation, route}: Props) {
       );
       Alert.alert('종목 삭제완료');
     } catch (error) {}
-
-    console.log(ID);
   };
-  console.log(assetList);
+
   return (
     <DetailPageUI
       navigation={navigation}

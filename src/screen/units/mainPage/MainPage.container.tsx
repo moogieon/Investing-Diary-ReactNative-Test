@@ -6,9 +6,11 @@ import {Alert} from 'react-native';
 import RNRestart from 'react-native-restart';
 import axios from 'axios';
 export default function MainPage({navigation}: Props) {
+  console.disableYellowBox = true;
+
   const [list, setList] = useState([]);
 
-  const {accessToken} = useContext(GlobalContext);
+  const {accessToken, reFetch} = useContext(GlobalContext);
   useEffect(() => {
     const getData = async () => {
       const resultList = await axios.get(
@@ -17,13 +19,10 @@ export default function MainPage({navigation}: Props) {
       );
 
       setList(resultList.data);
-
-      console.log('??', assets.data);
-      console.log('!!', resultList.data);
     };
 
     getData();
-  }, [accessToken]);
+  }, [accessToken, reFetch]);
 
   const goToLogin = () => {
     navigation.navigate('Login');

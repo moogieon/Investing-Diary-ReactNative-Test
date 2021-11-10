@@ -42,23 +42,23 @@ const HomeStack = createNativeStackNavigator<ParamList>();
 const App = () => {
   useEffect(() => {
     async function bbb() {
-      const aaa = await AsyncStorage.getItem('accessToken');
-      const ccc = await AsyncStorage.getItem('userInfo');
+      const tokens = await AsyncStorage.getItem('accessToken');
+      const users = await AsyncStorage.getItem('userInfo');
       const resultList = await axios.get(
         'https://the-rich-coding-test1.herokuapp.com/assets.json',
       );
-      setAccessToken(aaa);
+      setAccessToken(tokens);
       setAssets(resultList.data);
-      setUser(ccc);
+      setUser(users);
     }
 
     bbb();
   }, []);
 
   const [accessToken, setAccessToken] = useState();
-
   const [assets, setAssets] = useState([]);
   const [user, setUser] = useState();
+  const [reFetch, setReFetch] = useState();
 
   const value = {
     accessToken: accessToken,
@@ -67,8 +67,10 @@ const App = () => {
     setUser: setUser,
     setAssets: setAssets,
     assets: assets,
+    setReFetch: setReFetch,
+    reFetch: reFetch,
   };
-  console.log('Token', accessToken);
+
   return (
     <>
       <GlobalContext.Provider value={value}>

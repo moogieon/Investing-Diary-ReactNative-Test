@@ -1,6 +1,7 @@
 import LoginPageUI from './LoginPage.presenter';
 import React, {useContext, useState} from 'react';
 import axios from 'axios';
+import RNRestart from 'react-native-restart';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Alert,
@@ -34,10 +35,11 @@ export default function LoginPage({navigation}: Props) {
         JSON.stringify(result.data.user_id) || '',
       );
       navigation.dispatch(CommonActions.navigate('Main'));
+      RNRestart.Restart();
       setAccessToken(result.data.token);
+      setUser(result.data.id);
       Alert.alert('로그인 완료');
     } catch (error: any) {
-      console.log(error);
       Alert.alert(error);
     }
   };

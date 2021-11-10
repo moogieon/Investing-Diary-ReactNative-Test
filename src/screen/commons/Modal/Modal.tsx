@@ -19,21 +19,19 @@ function ModalTester(props: any) {
         'https://the-rich-coding-test1.herokuapp.com/assets.json',
       );
       setDatas(resultList.data);
+      const answer = {};
+      datas.forEach(data => {
+        answer[data.ticker] = {
+          id: data.id,
+          name: data.name,
+          amount: count.amount,
+          buy_price: count.buy_price,
+        };
+      });
+      setList(answer);
     };
 
-    const answer = {};
-    datas.forEach(data => {
-      answer[data.ticker] = {
-        id: data.id,
-        name: data.name,
-        amount: count.amount,
-        buy_price: count.buy_price,
-      };
-    });
-
-    setList(answer);
     getData();
-    console.log('오?', datas);
   }, [datas]);
 
   const onChangeAmount = text => {

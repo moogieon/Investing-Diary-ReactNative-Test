@@ -10,7 +10,7 @@ const INPUT_CONTENTS = {
 };
 
 export default function WritePage({navigation}: Props) {
-  const {accessToken} = useContext(GlobalContext);
+  const {accessToken, setReFetch} = useContext(GlobalContext);
   const [date, setDate] = useState(new Date());
   const [diaries, setDiaries] = useState(INPUT_CONTENTS);
   const [assets, setAssets] = useState([]);
@@ -37,14 +37,14 @@ export default function WritePage({navigation}: Props) {
       let url = 'https://the-rich-coding-test1.herokuapp.com/diary_assets';
 
       const result = await Promise.all(
-        assets.map(bbb => {
+        assets.map(assetdata => {
           return axios.post(
             url,
             {
               diary_id,
-              asset_id: bbb.id,
-              amount: bbb.amount,
-              buy_price: bbb.buy_price,
+              asset_id: assetdata.id,
+              amount: assetdata.amount,
+              buy_price: assetdata.buy_price,
             },
             {
               headers: {
@@ -56,7 +56,7 @@ export default function WritePage({navigation}: Props) {
       );
 
       navigation.navigate('Main');
-      console.log('parmas', result);
+      setReFetch('reFetchs');
     } catch (error) {
       Alert.alert(error.message);
     }
@@ -80,7 +80,6 @@ export default function WritePage({navigation}: Props) {
     });
     setAssetsModal(false);
   };
-  console.log('이거다', assets);
 
   return (
     <WritePageUI

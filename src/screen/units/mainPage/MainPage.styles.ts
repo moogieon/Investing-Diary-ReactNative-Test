@@ -60,6 +60,8 @@ export const Body = styled.View`
   height: 100%;
   padding: 20px;
   flex-direction: column;
+  padding-bottom: 200px;
+  /* background-color: black; */
 `;
 export const InvestList = styled.TouchableOpacity`
   border: 1px;

@@ -18,11 +18,12 @@ import {
 } from './MainPage.styles';
 import React, {useContext} from 'react';
 import {GlobalContext} from '../../../../App';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {getDate} from '../../commons/libraries/getdate';
 
 export default function MainPageUI(props: any) {
   const {accessToken, user} = useContext(GlobalContext);
+
   return (
     <>
       <Container>
@@ -66,9 +67,14 @@ export default function MainPageUI(props: any) {
         {accessToken && (
           <>
             <Body>
+              <View style={{marginBottom: 15}}></View>
               <InvestText>내 투자일지</InvestText>
-
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingBottom: 30,
+                }}>
                 <FlatList
                   data={props.list}
                   numColumns={2}
