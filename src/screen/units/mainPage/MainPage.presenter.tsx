@@ -47,7 +47,7 @@ export default function MainPageUI(props: any) {
             <Head>
               <HeaderLeft>
                 <Text style={{fontSize: 24, color: 'gold', marginBottom: 10}}>
-                  The Rich
+                  Invest APP
                 </Text>
               </HeaderLeft>
               <HeaderBar>
