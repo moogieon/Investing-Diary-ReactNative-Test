@@ -20,7 +20,7 @@ export const Button = styled.TouchableOpacity`
 
 export const User = styled.Text`
   font-size: 35px;
-  color: white;
+  color: green;
 `;
 
 export const Login = styled.Text`
